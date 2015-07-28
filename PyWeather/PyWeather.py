@@ -1,9 +1,15 @@
-﻿from urllib import Request, urlopen, URLError
+﻿from urllib.request import urlopen
+from xml.etree import ElementTree as ET
 
-request = Request('http://www.placekittens.com/')
-try:
-    response = urlopen(request)
-    kittens = response.read()
-    print(kittens[559:1000])
-except URLError as e:
-    print('no kittens because error', e)
+
+def getAttribute(xmlTree, attribute):
+    for el in xmlTree.findall('.//time'):
+        print(el.attrib.get(attribute))
+
+
+tenDayWeather = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=Cleveland,us&mode=xml&units=imperial&cnt=10'
+tree = ET.parse(urlopen(tenDayWeather))
+getAttribute(tree, 'day')
+
+
+
