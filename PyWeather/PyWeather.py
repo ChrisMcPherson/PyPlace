@@ -4,6 +4,9 @@ from xml.etree import ElementTree as ET
 import os.path
 
 def getDays(xmlTree, fileExists):
+    """
+    Returns a list with sublists for each day of the forecast 
+    """
     forecastDays = []
     if fileExists == 0:
         forecastDays.append(['Date']) #data header
@@ -14,6 +17,9 @@ def getDays(xmlTree, fileExists):
     return forecastDays
 
 def addAttribute(xmlTree, list, element, attribute, header, fileExists):
+    """
+    Appends weather attributes to each day of the forecast 
+    """
     if fileExists == 0:
         spam = 1
         for i, head in enumerate(list): #add attribute header
